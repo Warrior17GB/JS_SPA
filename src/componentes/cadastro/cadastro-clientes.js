@@ -9,9 +9,9 @@ const eventoEnvia = (form) => {
         const nome = event.target.querySelector('[data-nome]').value;
         const cpf = event.target.querySelector('[data-cpf]').value;
 
-        if(validaCPF(cpf)) {
+        if (validaCPF(cpf) === true) {
             cadastrarClientes(nome, cpf);
-        }else{
+        } else {
             alert('O CPF não é válido');
         }
     });

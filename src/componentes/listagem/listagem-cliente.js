@@ -8,9 +8,20 @@ const removeCliente = (id) => {
   }
 }
 
-const criarCorpoTabela = (tabela) => {
+const criarBotaoExcluir = (id) => {
+  const botao = document.createElement('button')
+  botao.classList.add('btn', 'btn-danger')
+  botao.innerHTML = 'Excluir'
 
-  const corpoTabela = document.createElement('tbody');
+  botao.addEventListener('click', () => {
+    removeCliente(id)
+  })
+  return botao
+}
+
+const criaCorpoTabela = (tabela) => {
+
+  const corpoTabela = document.createElement('tbody')
 
   const exibeCliente = (cpf, nome, id) => {
     const linha = document.createElement('tr');
@@ -18,12 +29,12 @@ const criarCorpoTabela = (tabela) => {
     const conteudoLinha = `
     <td>${cpf}</td>
     <td>${nome}</td>
-    <button type="button" class="btn btn-danger" onclick="removeCliente(${id})">Excluir</button>
-    <a href="edita-clientes.html?id=${id}">
-    <button type=""button class="btn btn-info">Editar</button>
-    </a>
+  
+    <button type="button" class="btn btn-info" onclick="navegacao('/edita?id=${id}'); return false;">Editar</button>
+   
 `
     linha.innerHTML = conteudoLinha;
+    linha.appendChild(criarBotaoExcluir(id))
     return linha;
   };
 
@@ -34,7 +45,7 @@ const criarCorpoTabela = (tabela) => {
   }
 
   )
-  tabela.appendChild(corpoTabela);
+  tabela.appendChild(corpoTabela)
 
 }
 
@@ -51,14 +62,15 @@ const inicializaTabela = () => {
     </tr>
   </thead>
 `
-  const tabela = document.createElement("table");
-  tabela.innerHTML = cabecalho;
-  tabela.classList.add("table");
+  const tabela = document.createElement("table")
+  tabela.innerHTML = cabecalho
+  tabela.classList.add("table")
 
-  criarCorpoTabela(tabela);
+  criaCorpoTabela(tabela)
 
-  return tabela;
+  return tabela
 }
 
 
-export default inicializaTabela;
+export default inicializaTabela
+
